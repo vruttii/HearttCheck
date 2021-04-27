@@ -1,0 +1,180 @@
+{% extends 'layout.html' %}
+
+{% block title %}Heart Disease Prediction{% endblock %}
+
+{% block content %}
+
+<form method="post" action="./process_form">
+  <div class="columns">
+    <div class="column is-half is-offset-one-quarter">
+      <center><p>Keep your cholesterol value ready for efficient risk calculation</p></center></br></br>
+      
+
+      <div class="columns is-mobile">
+        <div class="column">
+          <div class="field">
+            <label class="label">Age</label>
+            <div class="control">
+              <input class="input" name="age" type="number" min="1", max="110" placeholder="Enter age" value="{{ form_values['age'] }}" required>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="field">
+            <label class="label">Blood Pressure</label>
+            <div class="field has-addons">
+              <div class="control is-expanded">
+                <input class="input" type="number" name="bp_systolic" min="100" max="180" placeholder="Systolic" value="{{ form_values['bp_systolic'] }}" required>
+              </div>
+              <div class="control">
+                <a class="button is-static">/</a>
+              </div>
+              <div class="control is-expanded">
+                <input class="input" type="number" name="bp_diastolic" min="70" max="120" placeholder="Diastolic" value="{{ form_values['bp_diastolic'] }}" required>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-mobile">
+        <div class="column">
+          <div class="field">
+            <label class="label">Weight (kg)</label>
+            <div class="control">
+              <input class="input" name="weight_kg" type="number" min="0" , max="250" placeholder="Enter weight in kg" value="{{ form_values['weight_kg'] }}" required>
+            </div>
+            <p class="help"><a href="https://www.rapidtables.com/convert/weight/pound-to-kg.html" target="_blank">Converter: lb to kg</a></p>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="field">
+            <label class="label">Height (cm)</label>
+            <div class="control">
+              <input class="input" name="height_cm" type="number" min="0" , max="300" placeholder="Enter height in cm" value="{{ form_values['height_cm'] }}" required>
+            </div>
+            <p class="help"><a href="https://www.rapidtables.com/convert/length/height-converter.html" target="_blank">Converter: feet/inches to cm</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Cholesterol</label>
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="cholesterol" value="0" required {% if form_values['cholesterol'] == '0' %} checked{% endif %}>
+            Normal
+            <span class="has-text-success">
+              <i class="fas fa-check"></i>
+            </span>
+          </label>
+        </div>
+
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="cholesterol" value="1" required {% if form_values['cholesterol'] == '1' %} checked{% endif %}>
+            Above Normal
+            <span class="has-text-warning">
+              <i class="fas fa-exclamation-triangle"></i>
+            </span>
+          </label>
+        </div>
+
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="cholesterol" value="2" required {% if form_values['cholesterol'] == '2' %} checked{% endif %}>
+            Well Above Normal
+            <span class="has-text-danger">
+              <i class="fas fa-exclamation-circle"></i>
+            </span>
+          </label>
+        </div>
+      </div>
+  <div class="field">
+        <label class="label" >Physically active?</label>
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="pa" value="0" required {% if form_values['pa'] == '0' %} checked{% endif %} >
+        Yes
+            <span class="has-text-success">
+              <i class="fas fa-check"></i>
+            </span>
+          </label>
+        </div>
+ <div class="control">
+          <label class="radio">
+            <input type="radio" name="pa" value="1" required {% if form_values['pa'] == '1' %} checked{% endif %}>
+            No
+            <span class="has-text-warning">
+              <i class="fas fa-exclamation-circle"></i>
+            </span>
+          </label>
+        </div>
+      </div>
+    
+ <div class="field" >
+        <label class="label">Smoking?</label>
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="sm" value="0" required {% if form_values['sm'] == '0' %} checked{% endif %}>
+        Never
+            <span class="has-text-success">
+              <i class="fas fa-check"></i>
+            </span>
+          </label>
+        </div>
+    <div class="control">
+          <label class="radio">
+            <input type="radio" name="sm" value="1" required {% if form_values['sm'] == '1' %} checked{% endif %}>
+        Occasional
+            <span class="has-text-warning">
+              <i class="fas fa-exclamation-circle"></i>
+            </span>
+          </label>
+        </div>
+      <div class="control">
+          <label class="radio">
+            <input type="radio" name="sm" value="2" required {% if form_values['sm'] == '2' %} checked{% endif %}>
+            Regular
+            <span class="has-text-danger">
+              <i class="fas fa-exclamation-circle"></i>
+            </span>
+          </label>
+        </div>
+      </div>
+   
+    <div class="field">
+        <label class="label">
+Familial Hypertrophic Cardiomyopathy(Hereditary heart problems)</label>
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="hm" value="0" required {% if form_values['hm'] == '0 %} checked{% endif %}>
+        Yes
+            <span class="has-text-danger">
+              <i class="fas fa-exclamation-circle"></i>
+            </span>
+          </label>
+        </div>
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="hm" value="2" required {% if form_values['hm'] == '2' %} checked{% endif %}>
+          No
+            <span class="has-text-success">
+              <i class="fas fa-check  "></i>
+            </span>
+          </label>
+        </div>
+  </div>
+   
+      <div class="field is-grouped">
+        <div class="control">
+          <input type="submit" class="button is-link">
+        </div>
+      </div>
+
+    
+    </div>
+  </div>
+</form>
+{% endblock %}
